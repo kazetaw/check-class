@@ -1,0 +1,85 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #000000;
+    color: #fff;
+}
+
+.logo{
+    width: 8rem;
+}
+
+.popup p {
+    color: #000;
+}
+
+.profile{
+    position: relative;
+}
+
+.profile img {
+    width: 3rem;
+    border-radius: 50%;
+    display: block;
+    cursor: pointer;
+    border: 2px solid #9290C3;
+}
+
+
+.popup{
+    display: none;
+    position: absolute;
+    background-color: #ffffffec;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    right: 0;
+    top: 3rem;
+    color: #000;
+    z-index: 999;
+    padding: 0.3rem;
+    border-radius: 6px;
+}
+
+.btn-box {
+    border-top: 1px solid #797979;
+}
+
+svg {
+    color: #000;
+}
+
+button {
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: start;
+    font-size: 1rem;
+    
+}
+
+.btn:hover {
+    background-color: #cacaca;
+    transition: .3s;
+}
+
+.btn {
+    color: #000;
+    display: block;
+    width: 100%;
+}
+
+.btn-login{
+    background-color: #fff;
+    padding: 0.3rem 0.8rem;
+    color: #000;
+    border-radius: 3px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.show {
+    display: block;
+}

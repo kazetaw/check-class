@@ -1,0 +1,50 @@
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000000;
+    text-align: center;
+    
+}
+
+.content {
+    background-color: #fff;
+    color: #000000;
+    border-radius: 6px;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-student {
+    padding: 1rem;
+    text-align: center;
+}
+
+.form-student button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0.5rem 0;
+    color: #fff;
+    margin-top: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.form-student input{
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 0.5rem 0;
+    font-weight: 600;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+}

@@ -1,0 +1,11 @@
+.dashboard {
+    position: static;
+    transform: none;
+    color: #000000;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+
+
