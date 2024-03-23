@@ -8,7 +8,7 @@ const RoomStudent = ({ roomId }) => {
     const [room, setRoom] = useState(null);
     const [questionText, setQuestionText] = useState('');
     const [expanded, setExpanded] = useState(false);
-    const [newAnswer, setNewAnswer] = useState('');
+    const [answers, setAnswers] = useState([]); // ใช้ array ในการเก็บค่าของ input ตาม index
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const db = getFirestore();
@@ -20,6 +20,8 @@ const RoomStudent = ({ roomId }) => {
             if (roomSnapshot.exists()) {
                 setRoom({ id: roomSnapshot.id, ...roomSnapshot.data() });
                 setQuestionText(roomSnapshot.data().questions[0].question);
+                // กำหนดค่าเริ่มต้นของ answers ให้เป็น array ที่มีขนาดเท่ากับจำนวนของคำถาม
+                setAnswers(new Array(roomSnapshot.data().questions.length).fill(''));
             }
             setLoading(false);
         } catch (error) {
@@ -30,14 +32,14 @@ const RoomStudent = ({ roomId }) => {
 
     useEffect(() => {
         fetchRoomData();
-    }, [roomId]);
+    }, []);
 
-    const ansQuestion = async (event) => {
-        event.preventDefault(); // Prevent default form submission behavior
+    const ansQuestion = async (event, index) => {
+        event.preventDefault();
         const question = questionText;
-        const email = localStorage.getItem('userEmail'); // Fix typo here
+        const email = localStorage.getItem('userEmail');
         const name = localStorage.getItem('userName');
-        const answer = newAnswer;
+        const answer = answers[index]; // ดึงค่าของคำตอบจาก state ตาม index
 
         const roomSectionsRef = collection(db, "room_sections");
         try {
@@ -49,22 +51,21 @@ const RoomStudent = ({ roomId }) => {
                 const data = document.data();
                 let questionsUpdated = false;
 
-                data.questions.forEach((qItem, index) => {
-                    if (qItem.question === question) {
-                        // Found the question, now add the answer to its answers_list
-                        data.questions[index].answers_list.push({ name, email, answer });
+                data.questions.forEach((qItem, qIndex) => {
+                    if (qIndex === index) { // เปรียบเทียบ index เพื่อหาคำถามที่ตรงกับ index ที่ส่งเข้ามา
+                        data.questions[qIndex].answer_list.push({ name, email, answer });
                         questionsUpdated = true;
                     }
                 });
 
                 if (questionsUpdated) {
-                    // If the questions were updated, update the document in Firestore
                     await updateDoc(docRef, {
                         questions: data.questions
                     });
+                    alert('ตอบคำถามแล้ว')
                     console.log(`Answer added to question: ${question}`);
                     answerAdded = true;
-                    break; // If you only need to add the answer to the first matching question found
+                    break;
                 }
             }
         } catch (error) {
@@ -72,8 +73,14 @@ const RoomStudent = ({ roomId }) => {
         }
     };
 
-    const handleNewAnswerChange = (e) => {
-        setNewAnswer(e.target.value);
+    const handleNewAnswerChange = (event, index) => {
+        const { value } = event.target;
+        // อัปเดตค่าของ input ใน array ของ answers ตาม index ที่กำหนด
+        setAnswers(prevAnswers => {
+            const newAnswers = [...prevAnswers];
+            newAnswers[index] = value;
+            return newAnswers;
+        });
     };
 
     const showRoom = () => {
@@ -102,19 +109,19 @@ const RoomStudent = ({ roomId }) => {
 
                     <div className='content-room'>
                         <h1>คำถามทั้งหมด</h1>
-                        {room && room.questions && room.questions.reverse().map((question, index) => (
+                        {room && room.questions && room.questions.map((question, index) => (
                             <div key={index} className='q-col'>
                                 <h2 className='question'>{question.question}</h2>
-                                <form onSubmit={ansQuestion}>
+                                <form onSubmit={(event) => ansQuestion(event, index)}>
                                     <input
                                         placeholder='Type your answer here'
-                                        value={newAnswer}
-                                        onChange={(e) => handleNewAnswerChange(e)}
+                                        value={answers[index]} // ใช้ค่าของ answers ตาม index ในการกำหนดค่าของ input
+                                        onChange={(event) => handleNewAnswerChange(event, index)} // ใช้ index ในการอ้างอิงถึง input แต่ละตัว
                                     ></input>
                                     <button type="submit">Submit</button>
                                 </form>
                             </div>
-                        ))}
+                        )).reverse()}
                     </div>
                 </div>
             )}

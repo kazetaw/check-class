@@ -20,7 +20,7 @@ const TeacherDashboard = () => {
             }
         }
         fetchRoomData();
-    }, [rooms]);
+    }, []);
 
     return (
         <>

@@ -1,0 +1,25 @@
+/* FormStyles.css */
+.form-input {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    transition: border-color 0.3s;
+}
+
+.form-button {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    padding: 8px 12px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+
+
+h2{
+    font-size: 30px;
+}

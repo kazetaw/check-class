@@ -76,3 +76,17 @@
     font-size: 1.3rem;
     font-weight: 600;
 }
+
+.content-room form input{
+    padding: 0.3rem 0;
+    font-size: 1rem;
+    width: 20rem;
+}
+
+.content-room form button{
+    background-color: #000000;
+    color: #fff;
+    margin-left: 1rem;
+    border-radius: 3px;
+    padding: 0.3rem 0.5rem;
+}

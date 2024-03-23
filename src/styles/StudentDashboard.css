@@ -1,0 +1,55 @@
+/* styles/StudentDashboard.css */
+
+.header {
+    background-color: #007bff; /* สีพื้นหลังของ header */
+    padding: 1rem; /* ระยะห่างขอบ header */
+    color: #fff; /* สีข้อความของ header */
+    text-align: center; /* จัดตำแหน่งข้อความใน header ให้อยู่ตรงกลาง */
+}
+
+.container {
+    max-width: 600px; /* กำหนดขนาด container */
+    margin: 0 auto; /* จัดให้ container อยู่ตรงกลางของหน้าจอ */
+    padding: 2rem; /* ระยะห่างขอบ container */
+}
+
+.content {
+    display: flex; /* กำหนดให้เนื้อหาใน container เรียงต่อกันแนวนอน */
+    flex-direction: column; /* จัดให้เนื้อหาเรียงต่อกันแนวนอน */
+    align-items: center; /* จัดให้เนื้อหาอยู่ตรงกลางแนวนอน */
+}
+
+.form-student {
+    max-width: 300px; /* กำหนดขนาดฟอร์ม */
+    width: 100%; /* กำหนดความกว้างเท่ากับ container */
+    padding: 1rem; /* ระยะห่างขอบฟอร์ม */
+    border: 1px solid #ccc; /* กำหนดเส้นขอบของฟอร์ม */
+    border-radius: 5px; /* กำหนดมุมของฟอร์ม */
+}
+
+h3 {
+    margin-bottom: 1rem; /* ระยะห่างขอบล่างของข้อความ */
+    color: #000000; /* สีข้อความ */
+}
+
+input[type="text"] {
+    width: calc(100% - 20px); /* กำหนดขนาด input */
+    padding: 0.5rem; /* ระยะห่างขอบของ input */
+    margin-bottom: 0.5rem; /* ลดระยะห่างขอบล่างของ input */
+    border: 2px solid #ccc; /* กำหนดเส้นขอบของ input */
+    border-radius: 3px; /* กำหนดมุมของ input */
+}
+
+button {
+    padding: 0.1rem 0.8rem; /* ขนาด padding ของปุ่ม */
+    background-color: #007bff; /* สีพื้นหลังของปุ่ม */
+    color: #fff; /* สีข้อความของปุ่ม */
+    border: none; /* กำหนดไม่มีเส้นขอบ */
+    border-radius: 2px; /* กำหนดมุมของปุ่ม */
+    cursor: pointer; /* เปลี่ยน cursor เป็น pointer เมื่อโฮเวอร์ปุ่ม */
+    margin-top: 0.5rem; /* เพิ่มระยะห่างด้านบนของปุ่ม */
+}
+
+button:hover {
+    background-color: #0056b3; /* สีเมื่อโฮเวอร์ปุ่ม */
+}

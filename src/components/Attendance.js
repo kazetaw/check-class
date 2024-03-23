@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, doc, getDocs, updateDoc, getFirestore } from 'firebase/firestore';
+import '../styles/Attendance.css';
 
 const Attendance = () => {
     const [form, setForm] = useState({});
@@ -7,11 +8,11 @@ const Attendance = () => {
     const [editId, setEditId] = useState(null);
 
     const db = getFirestore();
-    const user_studentRef = collection(db, "user_student"); // Use 'db' to reference Firestore collection
+    const user_studentRef = collection(db, "user_student");
 
     useEffect(() => {
-        loadData(); // Call the 'loadData' function inside useEffect
-    }, [data]);
+        loadData();
+    }, []);
 
     const handleChange = (e) => {
         setForm({
@@ -22,7 +23,7 @@ const Attendance = () => {
 
     const loadData = async () => {
         try {
-            const querySnapshot = await getDocs(user_studentRef); // Use 'user_studentRef' to query Firestore
+            const querySnapshot = await getDocs(user_studentRef);
             const newData = querySnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
@@ -35,21 +36,31 @@ const Attendance = () => {
 
     const handleSave = async (id) => {
         try {
-            await updateDoc(doc(user_studentRef, id), form); // Update document with the new form data
+            await updateDoc(doc(user_studentRef, id), form);
             setEditId(null);
+            loadData(); // Reload data after saving
         } catch (err) {
             console.log(err);
         }
     };
 
-    const handleRandom = () => {
-        const randomIndex = Math.floor(Math.random() * data.length);
-        const randomStudent = data[randomIndex];
-        setData([randomStudent]); // Set data to display only the randomly selected student
+    const handleRandom = async () => {
+        try {
+            const querySnapshot = await getDocs(user_studentRef);
+            const newData = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            const randomIndex = Math.floor(Math.random() * newData.length);
+            const randomStudent = newData[randomIndex];
+            setData([randomStudent]);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
-        <div>
+        <div className='student-list'>
             <h2>Random Name:</h2>
             <button onClick={handleRandom}>Random</button>
             <table>
@@ -93,7 +104,6 @@ const Attendance = () => {
                     ))}
                 </tbody>
             </table>
-            <button className='create-question-btn'>Create Question</button>
         </div>
     );
 };
